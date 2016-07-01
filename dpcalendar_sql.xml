@@ -1,0 +1,26 @@
+<extension type="extension" version="3.5" method="upgrade">
+    <name>plg_dpcalendar_sql</name>
+    <creationDate>30/06/2016</creationDate>
+    <author>RAJESWARI</author>
+    <authorEmail></authorEmail>
+    <authorUrl></authorUrl>
+    <copyright></copyright>
+    <license></license>
+    <version>1.0</version>
+
+    <description>PLG_DPCALENDAR_SQL_XML_DESCRIPTION</description>
+    <files>
+        <filename plugin="dpcalendar_sql">dpcalendar_sql.php</filename>
+        <filename>index.html</filename>
+        <folder>forms</folder>
+        <folder>language</folder>
+    </files>
+    <config>
+        <fields name="params" addfieldpath="/administrator/components/com_dpcalendar/models/fields">
+            <fieldset name="basic">
+                <field name="ext" type="extcalendar" plugin="sql" label="" description="">
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
