@@ -8,90 +8,56 @@
 				   description="PLG_DPCALENDAR_SQL_FIELD_DRIVER_DESC" size="70"
 				   class="inputbox" />
 			<field name="host_name" type="text" default=""
-				   label="PLG_DPCALENDAR_SQL_FIELD_HOST_NAME_LABEL" required="true"
-				   description="PLG_DPCALENDAR_SQL_FIELD_HOST_NAME_DESC" size="70"
+				   label="PLG_DPCALENDAR_SQL_FIELD_HOST_LABEL" required="true"
+				   description="PLG_DPCALENDAR_SQL_FIELD_HOST_DESC" size="70"
 				   class="inputbox" />
 			<field name="user" type="text" default=""
-				   label="PLG_DPCALENDAR_SQL_FIELD_USER_NAME_LABEL" required="true"
-				   description="PLG_DPCALENDAR_SQL_FIELD_USER_NAME_DESC" size="70"
+				   label="PLG_DPCALENDAR_SQL_FIELD_USER_LABEL" required="true"
+				   description="PLG_DPCALENDAR_SQL_FIELD_USER_DESC" size="70"
 				   class="inputbox" />
 			<field name="pwd" type="text" default=""
 				   label="PLG_DPCALENDAR_SQL_FIELD_PWD_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_PWD_DESC" size="70"
 				   class="inputbox" />
 			<field name="db_name" type="text" default=""
-				   label="PLG_DPCALENDAR_SQL_FIELD_DB_NAME_LABEL" required="true"
-				   description="PLG_DPCALENDAR_SQL_FIELD_DB_NAME_DESC" size="70"
+				   label="PLG_DPCALENDAR_SQL_FIELD_DB_LABEL" required="true"
+				   description="PLG_DPCALENDAR_SQL_FIELD_DB_DESC" size="70"
 				   class="inputbox" />
-			<field name="tbl_prefix" type="text" default="tbl_"
-				   label="PLG_DPCALENDAR_SQL_FIELD_TBL_PREFIX_LABEL" required="false"
-				   description="PLG_DPCALENDAR_SQL_FIELD_TBL_PREFIX_DESC" size="70"
-				   class="inputbox" />
-			<field name="start_date_tbl" type="text" default="start_date_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_START_DATE_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_START_DATE_TABLE_DESC" size="70"
+			<field name="table_name" type="text" default="table_name"
+				label="PLG_DPCALENDAR_SQL_FIELD_TABLE_LABEL" required="true"
+				description="PLG_DPCALENDAR_SQL_FIELD_TABLE_DESC" size="70"
 				class="inputbox" />
 			<field name="start_date_column" type="text" default="start_date_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_START_DATE_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_START_DATE_DESC" size="70"
 				   class="inputbox" />
-			<field name="end_date_tbl" type="text" default="end_date_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_END_DATE_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_END_DATE_TABLE_DESC" size="70"
-				class="inputbox" />
 			<field name="end_date_column" type="text" default="end_date_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_END_DATE_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_END_DATE_DESC" size="70"
 				   class="inputbox" />
-			<field name="all_day_tbl" type="text" default="all_day_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_ALL_DAY_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_ALL_DAY_TABLE_DESC" size="70" class="inputbox" />
 			<field name="all_day_column" type="text" default="all_day_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_ALL_DAY_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_ALL_DAY_DESC" size="70" class="inputbox" />
-			<field name="title_tbl" type="text" default="title_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_TITLE_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_TITLE_TABLE_DESC" size="70" class="inputbox" />
 			<field name="title_column" type="text" default="title_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_TITLE_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_TITLE_DESC" size="70" class="inputbox" />
-			<field name="description_tbl" type="text" default="description_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_DESCRIPTION_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_DESCRIPTION_TABLE_DESC" size="70"
-				class="inputbox" />
 			<field name="description_column" type="text" default="description_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_DESCRIPTION_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_DESCRIPTION_DESC" size="70"
 				   class="inputbox" />
-			<field name="rrule_tbl" type="text" default="rrule_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_RRULE_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_RRULE_TABLE_DESC" size="70" class="inputbox" />
 			<field name="rrule_column" type="text" default="rrule_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_RRULE_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_RRULE_DESC" size="70" class="inputbox" />
-			<field name="location_tbl" type="text" default="location_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_LOCATION_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_LOCATION_TABLE_DESC" size="70"
-				class="inputbox" />
 			<field name="location_column" type="text" default="location_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_LOCATION_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_LOCATION_DESC" size="70"
 				   class="inputbox" />
-			<field name="url_tbl" type="text" default="url_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_URL_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_URL_TABLE_DESC" size="70" class="inputbox" />
 			<field name="url_column" type="text" default="url_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_URL_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_URL_DESC" size="70" class="inputbox" />
-			<field name="alias_tbl" type="text" default="alias_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_ALIAS_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_ALIAS_TABLE_DESC" size="70" class="inputbox" />
 			<field name="alias_column" type="text" default="alias_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_ALIAS_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_ALIAS_DESC" size="70" class="inputbox" />
-			<field name="color_tbl" type="text" default="color_table"
-				label="PLG_DPCALENDAR_SQL_FIELD_COLOR_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_COLOR_TABLE_DESC" size="70" class="inputbox" />
 			<field name="color_column" type="text" default="color_column"
 				   label="PLG_DPCALENDAR_SQL_FIELD_COLOR_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_COLOR_DESC" size="70" class="inputbox" />
