@@ -1,11 +1,8 @@
-<extension type="extension" version="3.5" method="upgrade">
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.3" type="plugin" group="dpcalendar" method="upgrade">
     <name>plg_dpcalendar_sql</name>
-    <creationDate>30/06/2016</creationDate>
+    <creationDate>July 2016</creationDate>
     <author>RAJESWARI</author>
-    <authorEmail></authorEmail>
-    <authorUrl></authorUrl>
-    <copyright></copyright>
-    <license></license>
     <version>1.0</version>
 
     <description>PLG_DPCALENDAR_SQL_XML_DESCRIPTION</description>
