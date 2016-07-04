@@ -24,9 +24,9 @@
 				   description="PLG_DPCALENDAR_SQL_FIELD_DB_DESC" size="70"
 				   class="inputbox" />
 			<field name="table_name" type="text" default="table_name"
-				label="PLG_DPCALENDAR_SQL_FIELD_TABLE_LABEL" required="true"
-				description="PLG_DPCALENDAR_SQL_FIELD_TABLE_DESC" size="70"
-				class="inputbox" />
+				   label="PLG_DPCALENDAR_SQL_FIELD_TABLE_LABEL" required="true"
+				   description="PLG_DPCALENDAR_SQL_FIELD_TABLE_DESC" size="70"
+				   class="inputbox" />
 			<field name="start_date_column" type="text" default="start_date"
 				   label="PLG_DPCALENDAR_SQL_FIELD_START_DATE_LABEL" required="true"
 				   description="PLG_DPCALENDAR_SQL_FIELD_START_DATE_DESC" size="70"

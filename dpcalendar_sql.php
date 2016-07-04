@@ -1,11 +1,10 @@
 <?php
 /**
-* @package     A main package name
-* @subpackage  dpcalendar_sql
-*
-* @copyright   A copyright
-* @license     A "Slug" license name e.g. GPL2
-*/
+ * @package     DPCalendar
+ * @subpackage  dpcalendar_sql
+ * @copyright   A copyright
+ * @license     A "Slug" license name e.g. GPL2
+ */
 
 defined('_JEXEC') or die;
 
@@ -28,121 +27,136 @@ class PlgDPCalendarDPCalendar_SQL extends DPCalendarSyncPlugin
         {
             return '';
         }
+
+        //Parameters required for porting
         $params = $calendar->params;
 
-        $option = array();
+        // To establish connection with external db and querying the db
+        try {
+            $option = array();
 
-        $option['driver']   = $params->get('driver');
-        $option['host']     = $params->get('host_name');
-        $option['user']     = $params->get('user');
-        $option['password'] = $params->get('pwd');
-        $option['database'] = $params->get('db_name');
+            $option['driver'] = $params->get('driver');
+            $option['host'] = $params->get('host_name');
+            $option['user'] = $params->get('user');
+            $option['password'] = $params->get('pwd');
+            $option['database'] = $params->get('db_name');
 
-        $db = JDatabaseDriver::getInstance( $option );
+            $db = JDatabaseDriver::getInstance($option);
 
-        $query = $db->getQuery(true);
+            $query = $db->getQuery(true);
 
-        $columns=array();
+            $columns = array();
 
-        $columns[]= $params->get('start_date_column');
-        $columns[]= $params->get('end_date_column');
-        $columns[]= $params->get('all_day_column');
-        $columns[]= $params->get('title_column');
-        $columns[]= $params->get('description_column');
-        $columns[]= $params->get('rrule_column');
-        $columns[]= $params->get('location_column');
-        $columns[]= $params->get('url_column');
-        $columns[]= $params->get('alias_column');
-        $columns[]= $params->get('color_column');
+            $columns[] = $params->get('start_date_column');
+            $columns[] = $params->get('end_date_column');
+            $columns[] = $params->get('all_day_column');
+            $columns[] = $params->get('title_column');
+            $columns[] = $params->get('description_column');
+            $columns[] = $params->get('rrule_column');
+            $columns[] = $params->get('location_column');
+            $columns[] = $params->get('url_column');
+            $columns[] = $params->get('alias_column');
+            $columns[] = $params->get('color_column');
 
-        $tableName=$params->get('table_name');
+            $tableName = $params->get('table_name');
 
-        $conditionClause=$params->get('start_date_column') .' >= \''. $startDate . '\' and '.$params->get('end_date_column').' <= \''. $endDate.'\'';
+            $conditionClause = $params->get('start_date_column') . ' >= \'' . $startDate . '\' and ' . $params->get('end_date_column') . ' <= \'' . $endDate . '\'';
 
-        $query->select($db->quoteName($columns));
-        $query->from($db->quoteName($tableName));
-        $query->where(($conditionClause));
+            $query->select($db->quoteName($columns));
+            $query->from($db->quoteName($tableName));
+            $query->where(($conditionClause));
 
-        $db->setQuery($query);
+            $db->setQuery($query);
 
-        $rows = $db->loadObjectList();
+            $rows = $db->loadObjectList();
+        }
+        catch (Exception $e)
+        {
+            $this->log($e->getMessage());
+            return '';//log message and return empty string on invalid db connection or operations
+        }
 
-        $text = array();
-        $text[] = 'BEGIN:VCALENDAR';
+        //To construct text in required format for saving data fetched from external db
+        if(sizeof($rows)>0) {
 
-        foreach ($rows as $row){
+            $text = array();
+
+            $text[] = 'BEGIN:VCALENDAR';
+
+            foreach ($rows as $row) {
 
                 $text[] = 'BEGIN:VEVENT';
 
-                $allDayCol=$params->get('all_day_column');
-                $allDay =$row->$allDayCol;
+                $allDayCol = $params->get('all_day_column');
+                $allDay = $row->$allDayCol;
 
-                $startDateCol=$params->get('start_date_column');
-                $startDate=DPCalendarHelper::getDate($row->$startDateCol);
+                $startDateCol = $params->get('start_date_column');
+                $startDate = DPCalendarHelper::getDate($row->$startDateCol);
 
-                if ($allDay)
-                {
-                        $text[] = 'DTSTART;VALUE=DATE:' . $startDate->format('Ymd');
-                }
-                else
-                {
-                        $text[] = 'DTSTART:' . $startDate->format('Ymd\THis\Z');
+                if ($allDay) {
+                    $text[] = 'DTSTART;VALUE=DATE:' . $startDate->format('Ymd');
+                } else {
+                    $text[] = 'DTSTART:' . $startDate->format('Ymd\THis\Z');
                 }
 
-                $endDateCol=$params->get('end_date_column');
-                $endDate=DPCalendarHelper::getDate($row->$endDateCol);
+                $endDateCol = $params->get('end_date_column');
+                $endDate = DPCalendarHelper::getDate($row->$endDateCol);
 
-                if ($allDay)
-                {
-                        $text[] = 'DTEND;VALUE=DATE:' . $endDate->format('Ymd');
-                }
-                else
-                {
-                        $text[] = 'DTEND:' . $endDate->format('Ymd\THis\Z');
+                if ($allDay) {
+                    $text[] = 'DTEND;VALUE=DATE:' . $endDate->format('Ymd');
+                } else {
+                    $text[] = 'DTEND:' . $endDate->format('Ymd\THis\Z');
                 }
 
-                $titleCol=$params->get('title_column');
-                $title=$row->$titleCol;
+                $titleCol = $params->get('title_column');
+                $title = $row->$titleCol;
 
                 $text[] = 'UID:' . md5($title . 'SQL');
+                $text[] = 'CATEGORIES:Default';
                 $text[] = 'SUMMARY:' . $title;
 
-                $descCol= $params->get('description_column');
-                $desc=$row->$descCol;
+                $descCol = $params->get('description_column');
+                $desc = $row->$descCol;
 
-                $text[] = 'DESCRIPTION:' .$desc;
+                $text[] = 'DESCRIPTION:' . $desc;
 
-                $rruleCol= $params->get('rrule_column');
-                $rrule=$row->$rruleCol;
+                $rruleCol = $params->get('rrule_column');
+                $rrule = $row->$rruleCol;
 
-                $text[] = 'RRULE:' .$rrule;
+                $text[] = 'RRULE:' . $rrule;
 
-                $locCol= $params->get('location_column');
-                $location=$row->$locCol;
+                $locCol = $params->get('location_column');
+                $location = $row->$locCol;
 
-                $text[] = 'LOCATION:' .$location;
+                $text[] = 'LOCATION:' . $location;
 
-                $urlCol= $params->get('url_column');
-                $url=$row->$urlCol;
+                $urlCol = $params->get('url_column');
+                $url = $row->$urlCol;
 
-                $text[] = 'X-URL:' .$url;
+                $text[] = 'X-URL:' . $url;
 
-                $aliasCol= $params->get('alias_column');
-                $alias=$row->$aliasCol;
+                $aliasCol = $params->get('alias_column');
+                $alias = $row->$aliasCol;
 
-                $text[] = 'X-ALIAS:' .$alias;
+                $text[] = 'X-ALIAS:' . $alias;
 
-                $colorCol= $params->get('color_column');
-                $color=$row->$colorCol;
+                $colorCol = $params->get('color_column');
+                $color = $row->$colorCol;
 
-                $text[] = 'X-COLOR:' .$color;
+                $text[] = 'X-COLOR:' . $color;
 
                 $text[] = 'END:VEVENT';
+            }
+
+            $text[] = 'END:VCALENDAR';
+
+            return $text;
+
+        }else{
+
+            return '';//return empty string if size of resultset is zero
+
         }
-
-        $text[] = 'END:VCALENDAR';
-
-        return $text;
 
     }
 }
