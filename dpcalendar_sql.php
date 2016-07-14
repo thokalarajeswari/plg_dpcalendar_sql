@@ -77,6 +77,7 @@ class PlgDPCalendarDPCalendar_SQL extends DPCalendarSyncPlugin
         }
 
         //To construct text in required format for saving data fetched from external db
+
         if(sizeof($rows)>0) {
 
             $text = array();
@@ -88,12 +89,13 @@ class PlgDPCalendarDPCalendar_SQL extends DPCalendarSyncPlugin
                 $text[] = 'BEGIN:VEVENT';
 
                 $allDayCol = $params->get('all_day_column');
-                $allDay = $row->$allDayCol;
+                $allDay = $row->$allDayCol == 1;
 
                 $startDateCol = $params->get('start_date_column');
                 $startDate = DPCalendarHelper::getDate($row->$startDateCol);
 
                 if ($allDay) {
+
                     $text[] = 'DTSTART;VALUE=DATE:' . $startDate->format('Ymd');
                 } else {
                     $text[] = 'DTSTART:' . $startDate->format('Ymd\THis\Z');
@@ -160,4 +162,3 @@ class PlgDPCalendarDPCalendar_SQL extends DPCalendarSyncPlugin
 
     }
 }
-?>
